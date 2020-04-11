@@ -1,0 +1,21 @@
+openapi: 3.0.0
+info:
+  title: iWine
+  version: '1.0'
+  contact:
+    name: Dmitry
+    email: dima@melodrom.ru
+  description: 'LAN API for iWine devices. Get current wine volume (in litres), alcohol contents (per cent), sugar (per cent), temperature, wine type (as a JSON list of strings and certainty values: {"red":90, "white":1,  "rose":9, "orange":0}). Aerate contents or cool/warm to a desired temperature. Set callback url to receive notifications to your device within LAN.'
+  license:
+    name: GPL
+servers:
+  - url: localhost
+    description: ''
+paths: {}
+components:
+  schemas: {}
+  securitySchemes:
+    API Key - 1:
+      name: API Key
+      type: apiKey
+      in: query
