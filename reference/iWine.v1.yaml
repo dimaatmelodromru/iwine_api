@@ -15,8 +15,6 @@ paths:
   /status:
     get:
       summary: status
-      tags:
-        - iwine endpoints
       responses:
         '200':
           description: OK
@@ -61,6 +59,8 @@ paths:
           description: 'Controller public key signed with private key, base64. Used to authenticate the controller.  `401 Unauthorized`. No _WWW-Authenticate_ header would be provided.'
           required: true
       security: []
+      tags:
+        - Getting Status Information
   /command:
     post:
       summary: command
@@ -106,9 +106,9 @@ paths:
                 - key
                 - sig
         description: ''
-      tags:
-        - iwine endpoints
       description: "To aerate the contents of iWine device or cool/warm the contents to a specified temperature, an authorized controller must send a POST request to `/command` endpoint. To authenticate the request, the requesting controller must include its public key as a base64-encoded string `key` and its public key signed with its private key as a base64-encoded string `sig` along with a _**command payload**_ in the body of the request.\n\nAll the parameters in the command request body are mandatory.\n\niWine would lookup the provided public key in its internal database of known controllers and, if found, check the signature.\n  \nIf the verification succeeds, iWine proceeds to decrypting and parsing the `payload`.\nIf the check fails, iWine would respond with HTTP error `401 Unauthorized`.\nIf decryption or parsing of the `payload` fails, iWine would respond with HTTP error `422 Unprocessable Entity`.\nIf any of the parameters are missing, not base64-strings or do not meet the length requirements, iWine would respond with `400 Bad Request`\n\nA _**command payload**_ is a JSON object constructed of one or both of the following items:\n\n`\"settemp\":\"_temperature_Celsius_\"`,\n\n`\"aerate\":\"on\"`\n\nand optional\n\n`\"callback\":\"_callback_URL_\"`\n\nto cool/warm and/or start aeration of the contents.\nThe cooling/warming process takes about 10 to 15 minutes and completes automatically.\nWhen each of the requested processes completes, iWine makes a POST HTTP request to _callback_URL_, if provided in the payload. The body of the callback POST request contains a _**callback_payload**_, base64-encoded JSON object with one of the following items:\n\n`\"aerate\": \"ok\"` or`\"aerate\": \"failed\"` to report of successful completion or failure of the aeration operation;\n\n`\"settemp\": _temperature_Celsius_` or `settemp: -1`, depending on the success of the requested operations (-1 for a failed heating/cooling operation);\n\nIn case of failure of either of the operations, a human-readable error message is included in the payload as well:\n\n`\"error\": \"Human-readable message in English\"`\n\nBoth _**command_payload**_ and _**callback_payload**_ must be encrypted with the private key of the request recipient (iWine private key for the former and controller private key for the latter) to maintain the security of communication.\n\nAll the parameters in a command payload are optional, but a valid command payload must have at least one of the two operation parameters: \"aerate\" or \"settemp\".\n\nThe order of parameters is irrelevant.\n\n#### _**command_payload**_ Example\n\n```\n{\n  \"settemp\":15,\n  \"aerate\":\"on\",\n  \"callback\":\"192.168.0.105/iwine\"\n}\n```\n\nThis payload instructs iWine to cool or warm the contents to 15 degrees Celsius, aerate the wine and call the provided endpoint after the completion of each operation, providing the information about its success or failure.\n  \n#### _**callback_payload**_ Examples\n\n```\n{\n  \"aerate\": \"failed\"\n  \"error\": \"Compressor failure\"\n}\n```\n\n```\n{\n  \"settemp\": 15\n}\n```"
+      tags:
+        - 'Operations and Notifications Management '
   /pair:
     post:
       summary: pair
@@ -150,8 +150,6 @@ paths:
               minLength: 398
               maxLength: 398
               pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
-      tags:
-        - iwine endpoints
       security: []
       description: |-
         Since iWine must work on a LAN over HTTP with no guarantee of access to the Internet and CA infrastructure, it relies on a custom RSA key exchange for mutual authorization and authentication of controllers and iWine devices.
@@ -161,6 +159,8 @@ paths:
         To initiate a pairing request controller must generate a 2048-bit RSA key pair and send a POST HTTP request to iWine `/pair` endpoint with its public key in its body. If this request was accepted by iWine and confirmed by its user in a timely manner, iWine generates a keypair and return its public key and signature in the POST response body with HTTP code 201. It accepts only the first valid pairing request and ignores all subsequent requests to the `/pair` endpoint until this pairing session ends and another one starts. If there were no valid pairing requests, the pairing mode would time out in 1 minute. Users can abort pairing mode sessions by short-pressing **PAIR** again at any time.
 
         The proposed security scheme does not protect from MITM and replay attacks, as we consider their mitigation outside of the scope of this task. Replay attacks, in particular, could be addressed by introducing nonces into payloads.
+      tags:
+        - Authorization and Authentication
     parameters: []
 components:
   schemas: {}
