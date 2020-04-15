@@ -25,9 +25,10 @@ paths:
               schema:
                 type: string
                 description: Status responce encrypted payload in base64
-                minLength: 344
-                maxLength: 344
-                pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+                example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB1gGTkY6Ne51sw6YkKu3Cy 7AvYYwymm+ofULTfNZF+rW29Xm1516jzHlsE0owXGaqOxuhOa0jwJTL7ckzsX0tz pOcHl8WIh0Ko8yHHCQMjrh7FdFMsh4aVRirnCJUcm+EU11qC0Okq/iYy11G9rZum 0ztRBZc6L2MRMbM/B1USi3Lj7ofiGupIqFov+XzCJOaxMhLdpGgrmcNrOTJKqINO y0xSPf/y6pvBxDljvLx6cOMW5HAjmNBDqX5oswd6+aJzU1iJwQAQBCA3and6W/dE pYT5IT3IogLEH7fcnOOitOAIIYDPPLp6+lkXK78dAar5Rr4rGZaPB95Ix5mbVnQ1 AgMBAAE=
+                minLength: 398
+                maxLength: 398
+                pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
               examples: {}
         '201':
           description: Created
@@ -43,18 +44,18 @@ paths:
       parameters:
         - schema:
             type: string
-            maxLength: 344
-            minLength: 344
-            pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+            maxLength: 398
+            minLength: 398
+            pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
           in: query
           name: key
           description: 'Controller public key, base64. Used for identification. iWine looks up this key in a table of known controllers. If this key cannot be found, this endpoint would return `403 Forbidden`'
           required: true
         - schema:
             type: string
-            minLength: 344
-            pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
-            maxLength: 344
+            minLength: 398
+            pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
+            maxLength: 398
           in: query
           name: sig
           description: 'Controller public key signed with private key, base64. Used to authenticate the controller.  `401 Unauthorized`. No _WWW-Authenticate_ header would be provided.'
@@ -90,16 +91,16 @@ paths:
                   type: string
                   description: Controller public key
                   example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBzPtyuqNOoT/C/hYqkV1VO iwXie0gIydBU+naDbyf7+us4D2U9X8HxPa055ttOTXhRkF71N7rVTMgmEDYm/gGE CPoh63GV3XWOTcfREU2ngA1beCs7i3NPqRxkTlHuAPzmpPNESoZ+ci3p05LZiX6M EJB6jzb0/ityaqmwKHW8wHfQOoscSR9eBddy4EnhBoVp6P+y3A44z6emStF7W57c tDnN+CzmQNP+lXJ476GPOkhgqsxs8qU8BbaXvkrLP993ebgZ9N9MsRonRuEMCn5L lHgRzqhYiSLYWV2WnQytnsoCQwi8zfZJ00Yc8YLlBteaIYDgzGUJUAW5Zky8b1a1 AgMBAAE=
-                  minLength: 344
-                  maxLength: 344
-                  pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+                  minLength: 398
+                  maxLength: 398
+                  pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
                 sig:
                   type: string
                   description: Controller public key signed with private key
                   example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnxUFXo+B1NYjEXckeU4t 2tEpy0SxNnIg8IDKLZNoV00/pzXK5uYIU9gghVHLarwazJ4th+ZpP8JAPg+BPgf3 pndjeRhKU2QfQedQQL1FS14Lkx8zIUvqPm7XkqYxCOd4jXUdO61sSXG/prOdV8m0 CSi51pnqemfAdNTLdMpd1NkfihrwgRusLEzxMCUiza3dSNDpOEV1JkR545WbNEdF 0sd7ucDSBXR8hDxuhNxN8Xi2+9sUMRr8cwYiypQ/OuppTYZvFA/jlOiOodgcYETe TD/oW5DTE9cwPxM/iTLnlbFyHfvwnKc7ID6eyHTPfAaXBysvE3HcLgATZrXm/vTh sQIDAQAB
-                  minLength: 344
-                  maxLength: 344
-                  pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+                  minLength: 398
+                  maxLength: 398
+                  pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
               required:
                 - payload
                 - key
@@ -107,6 +108,7 @@ paths:
         description: ''
       tags:
         - iwine endpoints
+      description: 'To aerate the contents of iWine device or cool/warm the contents to a specified temperature, an authorized controller must send a POST request to `/command` endpoint. To authenticate the request, the requesting controller must include its public key as a base64-encoded string `key` and its public key signed with its private key as a base64-encoded string `sig` along with a _**command payload**_ in the body of the request.'
   /pair:
     post:
       summary: pair
@@ -120,9 +122,9 @@ paths:
                 type: string
                 description: iWine device name and ed25519 public key
                 example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBqS/9IqZaT7d9IRaAekSYD fFTujFykWi7WlyYrTXhMCxwA+KqIJzHNKzY9Mdjl9O2jDUMLgwB224emDwNo7tgG 7mHq5KyKfFmp3UJQbMrKmMbPUJKd4Li236bH60vcDJ7Nn5dDZTDA07hpgbwKM9If 3QaD12TK1QuUTzmphVrzeLouBfQfRqhI/ZZv1OWKL0ZGeRdR4UrzPmdyxnZAxkED 1r4ZtRDRg5VKKI0se+eHPy7BV9itqV1HV6QCwP/gjKxQu2yxw+5kNOYIUui4KY/n KoJRpyJLm4Ebyo6ovY5Uvm7kDm2TDTIZNpaSafYI56eWC7ll5hhj3zpLizeGYY9B AgMBAAE=
-                minLength: 344
-                maxLength: 344
-                pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+                minLength: 398
+                maxLength: 398
+                pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
             application/xml:
               schema:
                 type: object
@@ -145,12 +147,13 @@ paths:
               type: string
               description: Requesting device name and ed25519 public key
               example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB1gGTkY6Ne51sw6YkKu3Cy 7AvYYwymm+ofULTfNZF+rW29Xm1516jzHlsE0owXGaqOxuhOa0jwJTL7ckzsX0tz pOcHl8WIh0Ko8yHHCQMjrh7FdFMsh4aVRirnCJUcm+EU11qC0Okq/iYy11G9rZum 0ztRBZc6L2MRMbM/B1USi3Lj7ofiGupIqFov+XzCJOaxMhLdpGgrmcNrOTJKqINO y0xSPf/y6pvBxDljvLx6cOMW5HAjmNBDqX5oswd6+aJzU1iJwQAQBCA3and6W/dE pYT5IT3IogLEH7fcnOOitOAIIYDPPLp6+lkXK78dAar5Rr4rGZaPB95Ix5mbVnQ1 AgMBAAE=
-              minLength: 344
-              maxLength: 344
-              pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+              minLength: 398
+              maxLength: 398
+              pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
       tags:
         - iwine endpoints
       security: []
+      description: 'To initiate a pairing request controller must generate a 2048-bit RSA key pair and send a POST HTTP request to iWine `/pair` endpoint with its public key in its body. If this request was accepted by iWine and confirmed by its user in a timely manner, iWine generates a keypair and return its public key and signature in the POST response body with HTTP code 201. It accepts only the first valid pairing request and ignores all subsequent requests to the `/pair` endpoint until this pairing session ends and another one starts. If there were no valid pairing requests, the pairing mode would time out in 1 minute. Users can abort pairing mode sessions by short-pressing **PAIR** again at any time.'
     parameters: []
 components:
   schemas: {}
