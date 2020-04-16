@@ -119,12 +119,19 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                description: iWine device name and ed25519 public key
+                type: object
+                description: iWine public key JSON
                 example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBqS/9IqZaT7d9IRaAekSYD fFTujFykWi7WlyYrTXhMCxwA+KqIJzHNKzY9Mdjl9O2jDUMLgwB224emDwNo7tgG 7mHq5KyKfFmp3UJQbMrKmMbPUJKd4Li236bH60vcDJ7Nn5dDZTDA07hpgbwKM9If 3QaD12TK1QuUTzmphVrzeLouBfQfRqhI/ZZv1OWKL0ZGeRdR4UrzPmdyxnZAxkED 1r4ZtRDRg5VKKI0se+eHPy7BV9itqV1HV6QCwP/gjKxQu2yxw+5kNOYIUui4KY/n KoJRpyJLm4Ebyo6ovY5Uvm7kDm2TDTIZNpaSafYI56eWC7ll5hhj3zpLizeGYY9B AgMBAAE=
-                minLength: 398
-                maxLength: 398
-                pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
+                properties:
+                  pub:
+                    type: string
+                    example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBqS/9IqZaT7d9IRaAekSYD fFTujFykWi7WlyYrTXhMCxwA+KqIJzHNKzY9Mdjl9O2jDUMLgwB224emDwNo7tgG 7mHq5KyKfFmp3UJQbMrKmMbPUJKd4Li236bH60vcDJ7Nn5dDZTDA07hpgbwKM9If 3QaD12TK1QuUTzmphVrzeLouBfQfRqhI/ZZv1OWKL0ZGeRdR4UrzPmdyxnZAxkED 1r4ZtRDRg5VKKI0se+eHPy7BV9itqV1HV6QCwP/gjKxQu2yxw+5kNOYIUui4KY/n KoJRpyJLm4Ebyo6ovY5Uvm7kDm2TDTIZNpaSafYI56eWC7ll5hhj3zpLizeGYY9B AgMBAAE=
+                    minLength: 398
+                    maxLength: 398
+                    pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
+                    description: 'iWine public key, base64'
+                required:
+                  - pub
             application/xml:
               schema:
                 type: object
@@ -144,12 +151,19 @@ paths:
         content:
           application/json:
             schema:
-              type: string
-              description: Requesting device name and ed25519 public key
+              type: object
+              description: Controller public key JSON
               example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB1gGTkY6Ne51sw6YkKu3Cy 7AvYYwymm+ofULTfNZF+rW29Xm1516jzHlsE0owXGaqOxuhOa0jwJTL7ckzsX0tz pOcHl8WIh0Ko8yHHCQMjrh7FdFMsh4aVRirnCJUcm+EU11qC0Okq/iYy11G9rZum 0ztRBZc6L2MRMbM/B1USi3Lj7ofiGupIqFov+XzCJOaxMhLdpGgrmcNrOTJKqINO y0xSPf/y6pvBxDljvLx6cOMW5HAjmNBDqX5oswd6+aJzU1iJwQAQBCA3and6W/dE pYT5IT3IogLEH7fcnOOitOAIIYDPPLp6+lkXK78dAar5Rr4rGZaPB95Ix5mbVnQ1 AgMBAAE=
-              minLength: 398
-              maxLength: 398
-              pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
+              properties:
+                pub:
+                  type: string
+                  example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB1gGTkY6Ne51sw6YkKu3Cy 7AvYYwymm+ofULTfNZF+rW29Xm1516jzHlsE0owXGaqOxuhOa0jwJTL7ckzsX0tz pOcHl8WIh0Ko8yHHCQMjrh7FdFMsh4aVRirnCJUcm+EU11qC0Okq/iYy11G9rZum 0ztRBZc6L2MRMbM/B1USi3Lj7ofiGupIqFov+XzCJOaxMhLdpGgrmcNrOTJKqINO y0xSPf/y6pvBxDljvLx6cOMW5HAjmNBDqX5oswd6+aJzU1iJwQAQBCA3and6W/dE pYT5IT3IogLEH7fcnOOitOAIIYDPPLp6+lkXK78dAar5Rr4rGZaPB95Ix5mbVnQ1 AgMBAAE=
+                  minLength: 398
+                  maxLength: 398
+                  pattern: '(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?){1}'
+                  description: 'Controller public key, base64'
+              required:
+                - pub
       security: []
       description: |-
         Since iWine must work on a LAN over HTTP with no guarantee of access to the Internet and CA infrastructure, it relies on a custom RSA key exchange for mutual authorization and authentication of controllers and iWine devices.
