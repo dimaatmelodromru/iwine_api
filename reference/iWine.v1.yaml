@@ -38,7 +38,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ''
+              type: object
+              properties:
+                '':
+                  $ref: ''
       parameters:
         - schema:
             type: string
@@ -66,8 +69,8 @@ paths:
       summary: command
       operationId: post-command
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
         '400':
           description: Bad Request
         '401':
@@ -121,7 +124,7 @@ paths:
               schema:
                 type: object
                 description: iWine public key JSON
-                example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBqS/9IqZaT7d9IRaAekSYD fFTujFykWi7WlyYrTXhMCxwA+KqIJzHNKzY9Mdjl9O2jDUMLgwB224emDwNo7tgG 7mHq5KyKfFmp3UJQbMrKmMbPUJKd4Li236bH60vcDJ7Nn5dDZTDA07hpgbwKM9If 3QaD12TK1QuUTzmphVrzeLouBfQfRqhI/ZZv1OWKL0ZGeRdR4UrzPmdyxnZAxkED 1r4ZtRDRg5VKKI0se+eHPy7BV9itqV1HV6QCwP/gjKxQu2yxw+5kNOYIUui4KY/n KoJRpyJLm4Ebyo6ovY5Uvm7kDm2TDTIZNpaSafYI56eWC7ll5hhj3zpLizeGYY9B AgMBAAE=
+                additionalProperties: false
                 properties:
                   pub:
                     type: string
@@ -153,7 +156,7 @@ paths:
             schema:
               type: object
               description: Controller public key JSON
-              example: MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQB1gGTkY6Ne51sw6YkKu3Cy 7AvYYwymm+ofULTfNZF+rW29Xm1516jzHlsE0owXGaqOxuhOa0jwJTL7ckzsX0tz pOcHl8WIh0Ko8yHHCQMjrh7FdFMsh4aVRirnCJUcm+EU11qC0Okq/iYy11G9rZum 0ztRBZc6L2MRMbM/B1USi3Lj7ofiGupIqFov+XzCJOaxMhLdpGgrmcNrOTJKqINO y0xSPf/y6pvBxDljvLx6cOMW5HAjmNBDqX5oswd6+aJzU1iJwQAQBCA3and6W/dE pYT5IT3IogLEH7fcnOOitOAIIYDPPLp6+lkXK78dAar5Rr4rGZaPB95Ix5mbVnQ1 AgMBAAE=
+              additionalProperties: false
               properties:
                 pub:
                   type: string
